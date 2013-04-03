@@ -14,7 +14,7 @@
 # Sample Usage:
 #
 #   postgresql::resource::database { 'test': }
-define mysql::resource::database (
+define postgresql::resource::database (
   $dbname        = $name,
   $character_set = 'UTF-8',
   $owner         = $postgresql::params::user
