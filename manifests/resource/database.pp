@@ -15,9 +15,9 @@
 #
 #   postgresql::resource::database { 'test': }
 define postgresql::resource::database (
-  $dbname        = $name,
-  $character_set = 'UTF-8',
-  $owner         = $postgresql::params::user
+  $dbname     = $name,
+  $dbencoding = 'UTF-8',
+  $dbowner    = $postgresql::params::user
 ) {
   Exec {
     path    => '/bin:/sbin:/usr/bin:/usr/sbin',
