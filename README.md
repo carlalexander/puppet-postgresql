@@ -1,6 +1,6 @@
-# Composer Module
+# PostgreSQL Module
 
-Puppet module designed to manage PstgreSQL.
+Puppet module designed to manage PostgreSQL.
 
 ## Requirements
 
