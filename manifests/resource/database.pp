@@ -4,7 +4,7 @@
 #
 # Parameters:
 #   [*dbname*]     - Database name. Default [$name]
-#   [*dbencoding*] - Database encoding. Default: UTF-8
+#   [*dbencoding*] - Database encoding. Default: UTF8
 #   [*dbowner*]    - Database owner. Default: postgres
 #
 # Actions:
@@ -16,7 +16,7 @@
 #   postgresql::resource::database { 'test': }
 define postgresql::resource::database (
   $dbname     = $name,
-  $dbencoding = 'UTF-8',
+  $dbencoding = $postgresql::params::encoding,
   $dbowner    = $postgresql::params::user
 ) {
   Exec {
