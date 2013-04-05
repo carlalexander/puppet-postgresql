@@ -27,6 +27,6 @@ define postgresql::resource::database (
 
   exec { "postgresql-create-database-${dbname}":
     command => "createdb --template=template0 -E ${dbencoding} -O ${dbowner} ${dbname}",
-    unless  => "psql -aA -l | grep ' ${dbname} '"
+    unless  => "psql -aA -l | grep '${dbname}|'"
   }
 }
