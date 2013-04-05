@@ -23,10 +23,5 @@ class postgresql inherits postgresql::params {
     notify => Class['postgresql::service'],
   }
 
-  class { 'postgresql::config': 
-    require => Class['postgresql::package'],
-    notify  => Class['postgresql::service']
-  }
-
   class { 'postgresql::service': }
 }
