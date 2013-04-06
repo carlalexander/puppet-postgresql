@@ -21,5 +21,4 @@ class postgresql::params {
 
   $bin_dir  = '/usr/lib/postgresql/${version}/bin'
   $data_dir = '/var/lib/postgresql/${version}/main'
-  $initdb   = "${bin_dir}/initdb"
 }
