@@ -42,7 +42,7 @@ define postgresql::resource::user (
   $superuser_sql  = $superuser  ? { true => 'SUPERUSER' , default => 'NOSUPERUSER' }
 
   exec { "postgresql-create-user-${username}":
-    command => "psql -At --command=\"CREATE ROLE '${username}' ENCRYPTED PASSWORD '${password}' LOGIN ${createrole_sql} ${createdb_sql} ${superuser_sql} CONNECTION LIMIT ${connection_limit}\"",
-    unless  => "psql -At --command=\"SELECT rolname FROM pg_roles WHERE rolname='${username}'\""
+    command => "psql -At --command=\"CREATE ROLE \"${username}\" ENCRYPTED PASSWORD '${password}' LOGIN ${createrole_sql} ${createdb_sql} ${superuser_sql} CONNECTION LIMIT ${connection_limit}\"",
+    unless  => "psql -At --command=\"SELECT rolname FROM pg_roles WHERE rolname='${username}'\" | grep ${username}"
   }  
 }
