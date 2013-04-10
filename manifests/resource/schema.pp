@@ -30,7 +30,7 @@ define postgresql::resource::schema (
   }
 
   exec { "postgresql-create-schema-${dbname}-${schema_name}":
-    command => "psql -At --dbname=${dbname} --command=\"CREATE SCHEMA ${schema_name}\""
-    unless  => "psql -aA --dbname=${dbname} --command=\"\dn\" | grep ${schema_name}"
+    command => "psql -At --dbname=${dbname} --command=\"CREATE SCHEMA ${schema_name}\"",
+    unless  => "psql -aA --dbname=${dbname} --command=\"\\dn\" | grep ${schema_name}"
   }
 }
