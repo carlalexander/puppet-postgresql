@@ -4,6 +4,7 @@
 #
 # Parameters:
 #   [*schema_name*] - Schema name. Default: [$name]
+#   [*schema_name*] - Schema name. Default: postgres
 #   [*dbname*]      - Database name.
 #
 # Actions:
@@ -16,8 +17,9 @@
 #     dbname => 'test'
 #   }
 define postgresql::resource::schema (
-  $schema_name = $name,
-  $dbname      = undef
+  $schema_name  = $name,
+  $schema_owner = $postgresql::params::user,
+  $dbname       = undef
 ) {
   Exec {
     path    => '/bin:/sbin:/usr/bin:/usr/sbin',
@@ -30,7 +32,7 @@ define postgresql::resource::schema (
   }
 
   exec { "postgresql-create-schema-${dbname}-${schema_name}":
-    command => "psql -At --dbname=${dbname} --command=\"CREATE SCHEMA ${schema_name}\"",
+    command => "psql -At --dbname=${dbname} --command=\"CREATE SCHEMA ${schema_name} AUTHORIZATION ${schema_owner}\"",
     unless  => "psql -aA --dbname=${dbname} --command=\"\\dn\" | grep ${schema_name}"
   }
 }
