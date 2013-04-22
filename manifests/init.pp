@@ -4,8 +4,8 @@
 #
 # Parameters:
 #
-# There are no default parameters for this class. All module parameters are managed
-# via the postgresql::params class
+#   [*enable_backups*] - Flag to install backups. Default: true
+#   [*backup_type*]    - Backup type. Rotating or normal
 #
 # Actions:
 #
@@ -18,9 +18,18 @@
 # node default {
 #   include postgresql
 # }
-class postgresql inherits postgresql::params {
+class postgresql (
+  $enable_backups = true,
+  $backup_type    = undef
+) inherits postgresql::params {
   class { 'postgresql::package':
     notify => Class['postgresql::service'],
+  }
+
+  class { 'postgresql::config':
+    enable_backups => $enable_backups,
+    backup_type    => $backup_type,
+    require        => Class['postgresql::package']
   }
 
   class { 'postgresql::service': }

@@ -19,6 +19,7 @@ class postgresql::params {
   $encoding = 'UTF8'
   $version  = '9.1'
 
-  $bin_dir  = '/usr/lib/postgresql/${version}/bin'
-  $data_dir = '/var/lib/postgresql/${version}/main'
+  $bin_dir    = '/usr/lib/postgresql/${version}/bin'
+  $data_dir   = '/var/lib/postgresql/${version}/main'
+  $backup_dir = '/var/backups/pgsql'
 }
