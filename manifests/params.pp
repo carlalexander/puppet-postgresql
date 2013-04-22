@@ -21,5 +21,5 @@ class postgresql::params {
 
   $bin_dir    = '/usr/lib/postgresql/${version}/bin'
   $data_dir   = '/var/lib/postgresql/${version}/main'
-  $backup_dir = '/var/backups/pgsql'
+  $backup_dir = '/var/backups/pgsql/'
 }
