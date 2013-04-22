@@ -18,8 +18,8 @@ class postgresql::config (
   $backup_type    = undef
 ) inherits postgresql::params {
   File {
-    owner => $postgresql::params::user,
-    group => $postgresql::params::user,
+    owner => 'root',
+    group => 'root',
     mode  => '0755',
   }
 
@@ -49,7 +49,7 @@ class postgresql::config (
 
     cron { 'pgsql-backup':
       command => '/usr/local/bin/pg_backup.sh',
-      user    => $postgresql::params::user,
+      user    => 'root',
       hour    => 2,
       minute  => 0,
       require => [File['/usr/local/bin/pg_backup.config'], File['/usr/local/bin/pg_backup.sh']],
