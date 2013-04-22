@@ -28,31 +28,31 @@ class postgresql::config (
       ensure  => directory,
     }
 
-    file { '/usr/local/bin/pgsql_backup.config':
+    file { '/usr/local/bin/pg_backup.config':
       ensure  => file,
-      content => template('postgresql/pgsql_backup.config.erb'),
+      content => template('postgresql/pg_backup.config.erb'),
     }
 
-    file { '/usr/local/bin/pgsql_backup.sh':
+    file { '/usr/local/bin/pg_backup.sh':
       ensure => file,
     }
 
     if ($backup_type == 'rotating') {
-      File['/usr/local/bin/pgsql_backup.sh'] {
+      File['/usr/local/bin/pg_backup.sh'] {
         source => 'puppet:///modules/postgresql/pg_backup_rotated.sh'
       }
     } else {
-      File['/usr/local/bin/pgsql_backup.sh'] {
+      File['/usr/local/bin/pg_backup.sh'] {
         source => 'puppet:///modules/postgresql/pg_backup.sh'
       }
     }
 
     cron { 'pgsql-backup':
-      command => '/usr/local/bin/pgsql_backup.sh',
+      command => '/usr/local/bin/pg_backup.sh',
       user    => $postgresql::params::user,
       hour    => 2,
       minute  => 0,
-      require => [File['/usr/local/bin/pgsql_backup.config'], File['/usr/local/bin/pgsql_backup.sh']],
+      require => [File['/usr/local/bin/pg_backup.config'], File['/usr/local/bin/pg_backup.sh']],
     }
   }
 }
